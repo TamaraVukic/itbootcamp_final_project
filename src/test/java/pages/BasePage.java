@@ -14,4 +14,6 @@ public abstract class BasePage {
         this.webDriverWait = webDriverWait;
         PageFactory.initElements(this.driver, this);
     }
+
+
 }

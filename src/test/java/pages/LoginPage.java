@@ -36,7 +36,28 @@ public class LoginPage extends BasePage {
         btnLogin.click();
     }
 
-    public String getMessage (){
+    public String getMessage() {
         return message.getText();
     }
+
+    public void fillEmail(String email) {
+        inputEmail.clear();
+        inputEmail.sendKeys(email);
+    }
+
+    public void fillPassword(String password) {
+        inputEmail.clear();
+        inputPassword.sendKeys(password);
+    }
+
+    public void fillLoginForm (String email, String password){
+       fillEmail(email);
+       fillPassword(password);
+       btnLogin.click();
+    }
+
+    public WebElement getMessageElement (){
+        return message;
+    }
+
 }

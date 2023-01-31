@@ -51,20 +51,18 @@ public abstract class BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        if (!driver.getCurrentUrl().equals(baseUrl) && !driver.getCurrentUrl().endsWith("/login")){
-        System.out.println("ovde sam");
-        WebElement logout = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
-        if (logout.isDisplayed() && logout.getText().equalsIgnoreCase("logout")) {
-            System.out.println("hello");
-            logout.click();
-    }}
+        if (!driver.getCurrentUrl().equals(baseUrl) && !driver.getCurrentUrl().endsWith("/login")) {
+            WebElement logout = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
+            if (logout.isDisplayed() && logout.getText().equalsIgnoreCase("logout")) {
+                logout.click();
+            }
+        }
 
     }
 
     @AfterClass
     public void afterClass() {
         driver.quit();
-
     }
 
 }

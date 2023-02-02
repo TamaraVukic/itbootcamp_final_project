@@ -17,7 +17,7 @@ public class LoginLogoutTests extends BaseTest {
     public void beforeClass() {
         super.beforeClass();
         loginPage = new LoginPage(driver, webDriverWait);
-        homePage = new HomePage(driver,webDriverWait);
+        homePage = new HomePage(driver, webDriverWait);
         //  faker = new Faker();
     }
 
@@ -34,7 +34,7 @@ public class LoginLogoutTests extends BaseTest {
     }
 
     @Test
-    public void inputTypesMatchTest() {
+    public void loginInputTypesMatchTest() {
         Assert.assertEquals(loginPage.getEmail(), "email");
         Assert.assertEquals(loginPage.getPassword(), "password");
     }
@@ -54,7 +54,6 @@ public class LoginLogoutTests extends BaseTest {
         webDriverWait.until(ExpectedConditions.visibilityOf(loginPage.getMessageElement()));
         Assert.assertTrue(loginPage.getMessage().contains("Wrong password"));
         loginRouteTest();
-
     }
 
     @Test
@@ -70,6 +69,10 @@ public class LoginLogoutTests extends BaseTest {
         loginPage.fillLoginForm(email, password);
         webDriverWait.until(ExpectedConditions.urlContains("/home"));
         Assert.assertTrue(homePage.logoutIsVisible());
+        homePage.logout();
+
+        driver.get(baseUrl + "/home");
+        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
 
 
     }

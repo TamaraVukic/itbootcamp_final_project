@@ -51,13 +51,12 @@ public abstract class BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        if (!driver.getCurrentUrl().equals(baseUrl) && !driver.getCurrentUrl().endsWith("/login")) {
+        if (!driver.getCurrentUrl().equals(baseUrl) && !driver.getCurrentUrl().endsWith("/login") && !driver.getCurrentUrl().endsWith("/signup")) {
             WebElement logout = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
             if (logout.isDisplayed() && logout.getText().equalsIgnoreCase("logout")) {
                 logout.click();
             }
         }
-
     }
 
     @AfterClass

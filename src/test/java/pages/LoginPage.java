@@ -50,13 +50,13 @@ public class LoginPage extends BasePage {
         inputPassword.sendKeys(password);
     }
 
-    public void fillLoginForm (String email, String password){
-       fillEmail(email);
-       fillPassword(password);
-       btnLogin.click();
+    public void fillLoginForm(String email, String password) {
+        fillEmail(email);
+        fillPassword(password);
+        btnLogin.click();
     }
 
-    public WebElement getMessageElement (){
+    public WebElement getMessageElement() {
         return message;
     }
 

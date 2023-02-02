@@ -19,11 +19,9 @@ public class SignUpPage extends BasePage {
     @FindBy(id = "confirmPassword")
     private WebElement inputConfirmPassword;
 
-    @FindBy(className = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button")
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button")
     private WebElement btnSignUp;
 
-    @FindBy (xpath = "//*[@id=\"app\"]/div[4]/div/div/div[1]")
-    private WebElement vDialog;
 
     @FindBy(className = "v-snack__content")
     private WebElement message;
@@ -44,7 +42,11 @@ public class SignUpPage extends BasePage {
         return inputPassword.getAttribute("type");
     }
 
-    public void signUp (){
+    public String getConfirmPassword() {
+        return inputConfirmPassword.getAttribute("type");
+    }
+
+    public void signUp() {
         btnSignUp.click();
     }
 
@@ -52,7 +54,23 @@ public class SignUpPage extends BasePage {
         return message.getText();
     }
 
-    public String getVdialog (){
-        return vDialog.getText();
+
+    public void fillSignUpForm(String name, String email, String password, String confirmPassword) {
+        inputName.clear();
+        inputEmail.clear();
+        inputPassword.clear();
+        inputConfirmPassword.clear();
+
+        inputName.sendKeys(name);
+        inputEmail.sendKeys(email);
+        inputPassword.sendKeys(password);
+        inputConfirmPassword.sendKeys(confirmPassword);
+
+        signUp();
     }
+
+    public WebElement getMessageElement() {
+        return message;
+    }
+
 }

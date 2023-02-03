@@ -30,7 +30,7 @@ public abstract class BaseTest {
     protected String fakerEmail = faker.internet().emailAddress();
     protected String fakerPassword = faker.internet().password();
 
-    protected final String baseUrl = "https://vue-demo.daniel-avellaneda.com";
+    protected final String baseUrl = "https://vue-demo.daniel-avellaneda.com/";
 
     @BeforeClass
     public void beforeClass() {
@@ -51,8 +51,9 @@ public abstract class BaseTest {
 
     @AfterMethod
     public void afterMethod() {
+
         if (!driver.getCurrentUrl().equals(baseUrl) && !driver.getCurrentUrl().endsWith("/login") && !driver.getCurrentUrl().endsWith("/signup")) {
-            WebElement logout = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
+            WebElement logout = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]"));
             if (logout.isDisplayed() && logout.getText().equalsIgnoreCase("logout")) {
                 logout.click();
             }

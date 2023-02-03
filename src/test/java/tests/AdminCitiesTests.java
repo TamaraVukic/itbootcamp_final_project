@@ -1,6 +1,5 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -10,7 +9,7 @@ import pages.AdminCitiesPage;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class AdminCitiesTest extends BaseTest {
+public class AdminCitiesTests extends BaseTest {
 
     // private String city = "Pera";
     private String city = faker.address().cityName();

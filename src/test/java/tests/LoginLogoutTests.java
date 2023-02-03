@@ -70,7 +70,7 @@ public class LoginLogoutTests extends BaseTest {
         Assert.assertTrue(homePage.logoutIsVisible());
         homePage.logout();
 
-        driver.get(baseUrl + "/home");
+        driver.get(baseUrl + "home");
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
 
 

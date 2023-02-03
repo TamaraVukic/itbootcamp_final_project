@@ -11,14 +11,13 @@ import pages.LoginPage;
 public class LoginLogoutTests extends BaseTest {
 
     private LoginPage loginPage;
-    private HomePage homePage;
+ //   private HomePage homePage;
 
     @BeforeClass
     public void beforeClass() {
         super.beforeClass();
         loginPage = new LoginPage(driver, webDriverWait);
         homePage = new HomePage(driver, webDriverWait);
-        //  faker = new Faker();
     }
 
     @BeforeMethod

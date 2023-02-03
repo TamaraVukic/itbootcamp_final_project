@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
@@ -12,12 +13,15 @@ public class HomePage extends BasePage {
 
     @FindBy(className = "dlgVerifyAccount")
     private WebElement vDialog;
-
-//    @FindBy(className = "v-card__title")
-//    private WebElement vDialog;
-
     @FindBy(className = "btnClose")
     private WebElement btnClose;
+
+    @FindBy (className = "btnAdmin")
+    private WebElement adminBtn;
+
+   @FindBy (className = "btnAdminCities")
+   private WebElement cityBtn;
+
 
     public HomePage(WebDriver driver, WebDriverWait webDriverWait) {
         super(driver, webDriverWait);
@@ -41,5 +45,11 @@ public class HomePage extends BasePage {
 
     public void closeDialog() {
         btnClose.click();
+    }
+
+    public void selectCities(){
+        adminBtn.click();
+        webDriverWait.until(ExpectedConditions.visibilityOf(cityBtn));
+        cityBtn.click();
     }
 }

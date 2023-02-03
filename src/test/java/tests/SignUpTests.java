@@ -58,5 +58,6 @@ public class SignUpTests extends BaseTest {
         webDriverWait.until(ExpectedConditions.visibilityOf(homePage.getVdialogElement()));
         Assert.assertTrue(homePage.getVdialog().contains("IMPORTANT: Verify your account"));
         homePage.closeDialog();
+
     }
 }

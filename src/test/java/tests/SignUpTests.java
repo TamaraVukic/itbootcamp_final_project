@@ -1,7 +1,5 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -11,13 +9,16 @@ import pages.HomePage;
 import pages.SignUpPage;
 
 public class SignUpTests extends BaseTest {
-    SignUpPage signUpPage;
+
+
+    private SignUpPage signUpPage;
 
     @BeforeClass
     public void beforeClass() {
         super.beforeClass();
         homePage = new HomePage(driver, webDriverWait);
         signUpPage = new SignUpPage(driver, webDriverWait);
+
     }
 
     @BeforeMethod
@@ -51,10 +52,12 @@ public class SignUpTests extends BaseTest {
     }
 
     @Test
-    public void validSignIp() {
+    public void validSignUp() {
+        String fakerEmail = faker.internet().emailAddress();
+        String fakerPassword = faker.internet().password();
         String fakerName = faker.name().name();
 
-        signUpPage.fillSignUpForm(fakerName, fakerEmail, password, password);
+        signUpPage.fillSignUpForm(fakerName, fakerEmail, fakerPassword, fakerPassword);
         webDriverWait.until(ExpectedConditions.visibilityOf(homePage.getVdialogElement()));
         Assert.assertTrue(homePage.getVdialog().contains("IMPORTANT: Verify your account"));
         homePage.closeDialog();

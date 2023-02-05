@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -10,14 +11,17 @@ import pages.LoginPage;
 
 public class LoginLogoutTests extends BaseTest {
 
+
+    private String fakerPassword;
     private LoginPage loginPage;
- //   private HomePage homePage;
+
 
     @BeforeClass
     public void beforeClass() {
         super.beforeClass();
         loginPage = new LoginPage(driver, webDriverWait);
         homePage = new HomePage(driver, webDriverWait);
+        fakerPassword = faker.internet().password();
     }
 
     @BeforeMethod
@@ -40,7 +44,7 @@ public class LoginLogoutTests extends BaseTest {
 
     @Test
     public void userDoesNotExistErrorTest() {
-
+        String fakerEmail = faker.internet().emailAddress();
         loginPage.fillLoginForm(fakerEmail, fakerPassword);
         webDriverWait.until(ExpectedConditions.visibilityOf(loginPage.getMessageElement()));
         Assert.assertTrue(loginPage.getMessage().contains("User does not exists"));

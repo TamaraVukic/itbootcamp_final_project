@@ -7,20 +7,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span")
+    @FindBy(css = "#app > div.v-application--wrap > div > header > div > div.v-toolbar__items > button.hidden-sm-and-down.btnLogout.v-btn.v-btn--text.theme--light.v-size--default")
     private WebElement logoutBtn;
 
     @FindBy(className = "dlgVerifyAccount")
     private WebElement vDialog;
+
     @FindBy(className = "btnClose")
     private WebElement btnClose;
 
-    @FindBy (className = "btnAdmin")
+    @FindBy(className = "btnAdmin")
     private WebElement adminBtn;
 
-   @FindBy (className = "btnAdminCities")
-   private WebElement cityBtn;
+    @FindBy(className = "btnProfile")
+    private WebElement profileBtn;
+
+    @FindBy(className = "btnAdminCities")
+    private WebElement cityBtn;
 
 
     public HomePage(WebDriver driver, WebDriverWait webDriverWait) {
@@ -47,9 +50,14 @@ public class HomePage extends BasePage {
         btnClose.click();
     }
 
-    public void selectCities(){
+    public void selectCities() {
         adminBtn.click();
         webDriverWait.until(ExpectedConditions.visibilityOf(cityBtn));
         cityBtn.click();
+    }
+
+    public void profile() {
+        profileBtn.click();
+        webDriverWait.until(ExpectedConditions.urlToBe("https://vue-demo.daniel-avellaneda.com/profile"));
     }
 }

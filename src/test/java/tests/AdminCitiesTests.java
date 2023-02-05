@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -11,8 +12,7 @@ import pages.LoginPage;
 
 public class AdminCitiesTests extends BaseTest {
 
-    // private String city = "Pera";
-    private String city = faker.address().cityName();
+    private String city;
     private LoginPage loginPage;
     private AdminCitiesPage adminCitiesPage;
 
@@ -30,46 +30,42 @@ public class AdminCitiesTests extends BaseTest {
         landingPage.login();
         loginPage.fillLoginForm(email, password);
         homePage.selectCities();
+        city = faker.address().cityName();
     }
 
-    @Test(priority = 1)
+    @Test
     public void adminRouteTest() {
         Assert.assertTrue(driver.getCurrentUrl().contains("/admin/cities"));
         Assert.assertTrue(adminCitiesPage.logoutIsVisible());
     }
 
-    @Test(priority = 2)
+    @Test
     public void createNewCityTest() {
-        adminCitiesPage.addNewCity();
-        adminCitiesPage.fillCityName(city);
-
+        adminCitiesPage.addNewCity(city);
         Assert.assertTrue(adminCitiesPage.getMessage().contains("Saved successfully"));
     }
 
-
-    @Test(priority = 3)
+    @Test
     public void editCityTest() {
-
-        adminCitiesPage.searchCity(city); //in case the test runs separately from other tests
-        adminCitiesPage.editCity();
+        adminCitiesPage.newCityEdit(city);
         Assert.assertTrue(adminCitiesPage.getMessage().contains("Saved successfully"));
     }
 
-    @Test(priority = 4)
+    @Test
     public void searchCityTest() {
-      //  adminCitiesPage.searchCity(city);
-
+        adminCitiesPage.newCityEdit(city);
+        adminCitiesPage.searchCity(city);
         Assert.assertTrue(adminCitiesPage.getCreatedCity().contains(city));
     }
 
-    @Test(priority = 5)
+    @Test
     public void deleteCityTest() {
-        searchCityTest();
-
+        adminCitiesPage.newCityEdit(city);
+        adminCitiesPage.searchCity(city);
         adminCitiesPage.deleteCity();
-
         webDriverWait.until(ExpectedConditions.visibilityOf(adminCitiesPage.getMessageElement()));
         Assert.assertTrue(adminCitiesPage.getMessage().contains("Deleted successfully"));
         adminCitiesPage.closeMessage();
     }
+
 }

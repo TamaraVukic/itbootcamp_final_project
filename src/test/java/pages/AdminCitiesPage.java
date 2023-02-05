@@ -1,6 +1,6 @@
 package pages;
 
-import com.github.javafaker.Faker;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,24 +23,26 @@ public class AdminCitiesPage extends BasePage {
 
     @FindBy(id = "search")
     private WebElement searchBar;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
     private WebElement message;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]/button")
     private WebElement btnCloseMessage;
-    @FindBy (id = "edit")
+
+    @FindBy(id = "edit")
     private WebElement btnEdit;
 
-    @FindBy (xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")
     private WebElement createdCity;
 
-    @FindBy (id = "delete")
+    @FindBy(id = "delete")
     private WebElement btnDelete;
 
-    @FindBy (className = "v-card")
+    @FindBy(className = "v-card")
     private WebElement deleteDialog;
 
-    //xpath = "//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span"
-    @FindBy(xpath = "//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span")
+    @FindBy(css = "#app > div.v-dialog__content.v-dialog__content--active > div > div > div.v-card__actions > button.v-btn.v-btn--text.theme--light.v-size--default.red--text.text--lighten3")
     private WebElement btnDeleteConfirm;
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait webDriverWait) {
@@ -56,11 +58,8 @@ public class AdminCitiesPage extends BasePage {
         logoutBtn.click();
     }
 
-    public void addNewCity() {
+    public void addNewCity(String city) {
         btnAddNewCity.click();
-    }
-
-    public void fillCityName( String city) {
         inputName.sendKeys(city);
         btnSave.click();
     }
@@ -77,30 +76,52 @@ public class AdminCitiesPage extends BasePage {
         btnCloseMessage.click();
     }
 
-    public WebElement getDeleteDialog (){
+    public WebElement getDeleteDialog() {
         return deleteDialog;
     }
-    public void searchCity (String city){
-      //  searchBar.clear();
+
+    public String getSearch() {
+        return searchBar.getAttribute("value");
+    }
+
+    public WebElement getSearchElement() {
+        return searchBar;
+    }
+
+    public void searchCity(String city) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        searchBar.sendKeys(Keys.CONTROL + "a");
+        searchBar.sendKeys(Keys.DELETE);
         searchBar.sendKeys(city);
     }
 
-    public void editCity (){
+    public void editCity(String city) {
         btnEdit.click();
-        inputName.sendKeys(" - edited");
+        inputName.sendKeys(Keys.CONTROL + "a");
+        inputName.sendKeys(Keys.DELETE);
+        inputName.sendKeys(city + " - edited");
         btnSave.click();
     }
 
-    public String getCreatedCity (){
+    public String getCreatedCity() {
         return createdCity.getText();
     }
 
-    public void deleteCity (){
+    public void deleteCity() {
         btnDelete.click();
         webDriverWait.until(ExpectedConditions.visibilityOf(btnDeleteConfirm));
         btnDeleteConfirm.click();
     }
 
+    public void newCityEdit(String city) {
+        addNewCity(city);
+        searchCity(city);
+        editCity(city);
+    }
 }
 
 

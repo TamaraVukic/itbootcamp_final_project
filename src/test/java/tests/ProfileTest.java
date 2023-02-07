@@ -1,22 +1,19 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AdminCitiesPage;
 import pages.HomePage;
 import pages.LoginPage;
-import pages.ProfilPage;
+import pages.ProfilePage;
 
-import java.util.Locale;
 
 public class ProfileTest extends BaseTest {
 
     private LoginPage loginPage;
-    private ProfilPage profilPage;
+    private ProfilePage profilePage;
     private String city;
 
     @BeforeClass
@@ -24,16 +21,15 @@ public class ProfileTest extends BaseTest {
         super.beforeClass();
         loginPage = new LoginPage(driver, webDriverWait);
         homePage = new HomePage(driver, webDriverWait);
-        profilPage = new ProfilPage(driver, webDriverWait);
+        profilePage = new ProfilePage(driver, webDriverWait);
         city = "New York";
-
     }
 
     @BeforeMethod
     public void beforeMethod() {
         super.beforeMethod();
         landingPage.login();
-        loginPage.fillLoginForm(email, password);
+        loginPage.fillLoginForm(EMAIL, PASSWORD);
         homePage.profile();
     }
 
@@ -44,17 +40,17 @@ public class ProfileTest extends BaseTest {
         String randomCountry = faker.country().name();
         String randomGitHub = "https://github.com/" + randomName.toLowerCase();
         String randomTwitter = "https://twitter.com/" + randomName.toLowerCase();
-        profilPage.editProfile(randomName, randomPhone, city, randomCountry, randomTwitter, randomGitHub);
+        profilePage.editProfile(randomName, randomPhone, city, randomCountry, randomTwitter, randomGitHub);
 
-        webDriverWait.until(ExpectedConditions.visibilityOf(profilPage.getMessageElement()));
-        Assert.assertTrue(profilPage.getMessage().contains("Profile saved successfuly"));
-        profilPage.closeMessage();
-        Assert.assertEquals(profilPage.getName(), randomName);
-        Assert.assertEquals(profilPage.getPhone(), randomPhone);
-        Assert.assertEquals(profilPage.getCity(), city);
-        Assert.assertEquals(profilPage.getCountry(), randomCountry);
-        Assert.assertEquals(profilPage.getTwitter(), randomTwitter);
-        Assert.assertEquals(profilPage.getGitHub(), randomGitHub);
+        webDriverWait.until(ExpectedConditions.visibilityOf(profilePage.getMessageElement()));
+        Assert.assertTrue(profilePage.getMessage().contains("Profile saved successfuly"));
+        profilePage.closeMessage();
+        Assert.assertEquals(profilePage.getName(), randomName);
+        Assert.assertEquals(profilePage.getPhone(), randomPhone);
+        Assert.assertEquals(profilePage.getCity(), city);
+        Assert.assertEquals(profilePage.getCountry(), randomCountry);
+        Assert.assertEquals(profilePage.getTwitter(), randomTwitter);
+        Assert.assertEquals(profilePage.getGitHub(), randomGitHub);
     }
 
 }

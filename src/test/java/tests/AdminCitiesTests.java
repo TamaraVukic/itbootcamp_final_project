@@ -1,6 +1,5 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -28,7 +27,7 @@ public class AdminCitiesTests extends BaseTest {
     public void beforeMethod() {
         super.beforeMethod();
         landingPage.login();
-        loginPage.fillLoginForm(email, password);
+        loginPage.fillLoginForm(EMAIL, PASSWORD);
         homePage.selectCities();
         city = faker.address().cityName();
     }
@@ -62,6 +61,7 @@ public class AdminCitiesTests extends BaseTest {
     public void deleteCityTest() {
         adminCitiesPage.newCityEdit(city);
         adminCitiesPage.searchCity(city);
+        Assert.assertTrue(adminCitiesPage.getCreatedCity().contains(city));
         adminCitiesPage.deleteCity();
         webDriverWait.until(ExpectedConditions.visibilityOf(adminCitiesPage.getMessageElement()));
         Assert.assertTrue(adminCitiesPage.getMessage().contains("Deleted successfully"));

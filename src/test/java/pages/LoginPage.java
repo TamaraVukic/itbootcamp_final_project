@@ -32,10 +32,6 @@ public class LoginPage extends BasePage {
         return inputPassword.getAttribute("type");
     }
 
-    public void loginConfirm() {
-        btnLogin.click();
-    }
-
     public String getMessage() {
         return message.getText();
     }

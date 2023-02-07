@@ -1,6 +1,5 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -10,7 +9,6 @@ import pages.HomePage;
 import pages.LoginPage;
 
 public class LoginLogoutTests extends BaseTest {
-
 
     private String fakerPassword;
     private LoginPage loginPage;
@@ -48,12 +46,12 @@ public class LoginLogoutTests extends BaseTest {
         loginPage.fillLoginForm(fakerEmail, fakerPassword);
         webDriverWait.until(ExpectedConditions.visibilityOf(loginPage.getMessageElement()));
         Assert.assertTrue(loginPage.getMessage().contains("User does not exists"));
-        loginRouteTest();
+        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
     }
 
     @Test
     public void wrongPasswordError() {
-        loginPage.fillLoginForm(email, fakerPassword);
+        loginPage.fillLoginForm(EMAIL, fakerPassword);
         webDriverWait.until(ExpectedConditions.visibilityOf(loginPage.getMessageElement()));
         Assert.assertTrue(loginPage.getMessage().contains("Wrong password"));
         loginRouteTest();
@@ -61,24 +59,20 @@ public class LoginLogoutTests extends BaseTest {
 
     @Test
     public void validLoginTest() {
-        loginPage.fillLoginForm(email, password);
+        loginPage.fillLoginForm(EMAIL, PASSWORD);
         webDriverWait.until(ExpectedConditions.urlContains("/home"));
         Assert.assertTrue(driver.getCurrentUrl().contains("/home"));
-
     }
 
     @Test
-    public void Logout() {
-        loginPage.fillLoginForm(email, password);
+    public void logout() {
+        loginPage.fillLoginForm(EMAIL, PASSWORD);
         webDriverWait.until(ExpectedConditions.urlContains("/home"));
         Assert.assertTrue(homePage.logoutIsVisible());
         homePage.logout();
 
-        driver.get(baseUrl + "home");
+        driver.get(BASE_URL + "home");
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
-
-
     }
-
 
 }

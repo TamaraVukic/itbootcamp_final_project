@@ -39,9 +39,6 @@ public class AdminCitiesPage extends BasePage {
     @FindBy(id = "delete")
     private WebElement btnDelete;
 
-    @FindBy(className = "v-card")
-    private WebElement deleteDialog;
-
     @FindBy(css = "#app > div.v-dialog__content.v-dialog__content--active > div > div > div.v-card__actions > button.v-btn.v-btn--text.theme--light.v-size--default.red--text.text--lighten3")
     private WebElement btnDeleteConfirm;
 
@@ -49,14 +46,10 @@ public class AdminCitiesPage extends BasePage {
         super(driver, webDriverWait);
     }
 
-
     public boolean logoutIsVisible() {
         return logoutBtn.isDisplayed();
     }
 
-    public void logout() {
-        logoutBtn.click();
-    }
 
     public void addNewCity(String city) {
         btnAddNewCity.click();
@@ -74,18 +67,6 @@ public class AdminCitiesPage extends BasePage {
 
     public void closeMessage() {
         btnCloseMessage.click();
-    }
-
-    public WebElement getDeleteDialog() {
-        return deleteDialog;
-    }
-
-    public String getSearch() {
-        return searchBar.getAttribute("value");
-    }
-
-    public WebElement getSearchElement() {
-        return searchBar;
     }
 
     public void searchCity(String city) {

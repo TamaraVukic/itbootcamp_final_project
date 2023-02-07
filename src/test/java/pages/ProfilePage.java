@@ -1,22 +1,22 @@
 package pages;
 
-import com.google.j2objc.annotations.Weak;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ProfilPage extends BasePage {
+public class ProfilePage extends BasePage {
     @FindBy(id = "name")
     private WebElement inputName;
 
     @FindBy(id = "phone")
     private WebElement inputPhone;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div/div[3]/span/div/div/div[1]/div[2]/div/button")
     private WebElement deletePhone;
+
     @FindBy(id = "city")
     private WebElement inputCity;
 
@@ -41,7 +41,7 @@ public class ProfilPage extends BasePage {
     @FindBy(css = "#app > div.v-application--wrap > main > div > div.container.container--fluid > div > div > div:nth-child(4) > div > div > div > div > div.v-snack__content > button > span")
     private WebElement btnCloseMessage;
 
-    public ProfilPage(WebDriver driver, WebDriverWait webDriverWait) {
+    public ProfilePage(WebDriver driver, WebDriverWait webDriverWait) {
         super(driver, webDriverWait);
     }
 
@@ -49,18 +49,14 @@ public class ProfilPage extends BasePage {
         inputName.click();
         inputName.sendKeys(Keys.CONTROL + "a");
         inputName.sendKeys(Keys.DELETE);
-
         deletePhone.click();
-
         deleteCity.click();
-
         inputCountry.sendKeys(Keys.CONTROL + "a");
         inputCountry.sendKeys(Keys.DELETE);
         inputTwitter.sendKeys(Keys.CONTROL + "a");
         inputTwitter.sendKeys(Keys.DELETE);
         inputGitHub.sendKeys(Keys.CONTROL + "a");
         inputGitHub.sendKeys(Keys.DELETE);
-
 
     }
 

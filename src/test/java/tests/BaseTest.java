@@ -18,22 +18,21 @@ import java.time.Duration;
 public abstract class BaseTest {
 
     protected WebDriver driver;
-    protected WebDriverWait webDriverWait;
 
+    protected WebDriverWait webDriverWait;
     protected LandingPage landingPage;
     protected HomePage homePage;
     protected Faker faker;
 
-    protected final String email = "admin@admin.com";  //Valid email and password
-    protected final String password = "12345";
+    protected final String EMAIL = "admin@admin.com";  //Valid email and password
+    protected final String PASSWORD = "12345";
 
-    protected final String baseUrl = "https://vue-demo.daniel-avellaneda.com/";
+    protected final String BASE_URL = "https://vue-demo.daniel-avellaneda.com/";
 
 
     // since the LandingPage is a starting point for every test class, it is initialized in @BeforeClass
     @BeforeClass
     public void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", "C:\\ITBOOTCAMP\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         landingPage = new LandingPage(driver, webDriverWait);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -43,10 +42,9 @@ public abstract class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get(baseUrl);
+        driver.get(BASE_URL);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
     }
 
     //Excluding landing page, login page, and sign up page from the list of pages that should have Logout Button.
@@ -55,7 +53,7 @@ public abstract class BaseTest {
     @AfterMethod
     public void afterMethod() {
 
-        if (!driver.getCurrentUrl().equals(baseUrl) && !driver.getCurrentUrl().endsWith("/login") && !driver.getCurrentUrl().endsWith("/signup")) {
+        if (!driver.getCurrentUrl().equals(BASE_URL) && !driver.getCurrentUrl().endsWith("/login") && !driver.getCurrentUrl().endsWith("/signup")) {
             WebElement logout = driver.findElement(By.cssSelector("#app > div.v-application--wrap > div > header > div > div.v-toolbar__items > button.hidden-sm-and-down.btnLogout.v-btn.v-btn--text.theme--light.v-size--default"));
             if (logout.isDisplayed() && logout.getText().equalsIgnoreCase("logout")) {
                 logout.click();

@@ -25,7 +25,6 @@ public class HomePage extends BasePage {
     @FindBy(className = "btnAdminCities")
     private WebElement cityBtn;
 
-
     public HomePage(WebDriver driver, WebDriverWait webDriverWait) {
         super(driver, webDriverWait);
     }

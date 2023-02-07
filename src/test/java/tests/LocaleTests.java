@@ -1,6 +1,5 @@
 package tests;
 
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,7 +13,6 @@ public class LocaleTests extends BaseTest {
         webDriverWait.until(ExpectedConditions.visibilityOf(landingPage.getBtnEn()));
         landingPage.pickLanguage(Locale.EN);
         Assert.assertTrue(landingPage.getHeader().contains("Landing"));
-
     }
 
     @Test

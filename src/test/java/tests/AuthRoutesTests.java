@@ -7,25 +7,25 @@ public class AuthRoutesTests extends BaseTest {
 
     @Test
     public void authRouteHomeTest() {
-        driver.get(baseUrl + "home");
+        driver.get(BASE_URL + "home");
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
     }
 
     @Test
     public void authRouteProfileTest() {
-        driver.get(baseUrl + "profile");
+        driver.get(BASE_URL + "profile");
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
     }
 
     @Test
     public void authRouteAdminCitiesTest() {
-        driver.get(baseUrl + "admin/cities");
+        driver.get(BASE_URL + "admin/cities");
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
     }
 
     @Test
     public void authRouteAdminUsersTest() {
-        driver.get(baseUrl + "admin/users");
+        driver.get(BASE_URL + "admin/users");
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
     }
 }

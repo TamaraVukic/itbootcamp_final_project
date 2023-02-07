@@ -6,15 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LandingPage extends BasePage {
-    protected Locale locale;
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/a[3]/span")
     private WebElement loginBtn;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/a[4]/span")
     private WebElement signUpBtn;
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span")
-    private WebElement logoutBtn;
 
     @FindBy(className = "btnLocaleActivation")
     private WebElement btnlocale;

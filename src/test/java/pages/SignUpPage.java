@@ -22,16 +22,11 @@ public class SignUpPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button")
     private WebElement btnSignUp;
 
-
     @FindBy(className = "v-snack__content")
     private WebElement message;
 
     public SignUpPage(WebDriver driver, WebDriverWait webDriverWait) {
         super(driver, webDriverWait);
-    }
-
-    public String getName() {
-        return inputName.getAttribute("type");
     }
 
     public String getEmail() {
@@ -53,7 +48,6 @@ public class SignUpPage extends BasePage {
     public String getMessage() {
         return message.getText();
     }
-
 
     public void fillSignUpForm(String name, String email, String password, String confirmPassword) {
         inputName.clear();

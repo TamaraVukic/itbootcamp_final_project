@@ -13,7 +13,7 @@ public class LandingPage extends BasePage {
     private WebElement signUpBtn;
 
     @FindBy(className = "btnLocaleActivation")
-    private WebElement btnlocale;
+    private WebElement btnLocale;
 
     @FindBy(className = "btnEN")
     private WebElement btnEn;
@@ -40,7 +40,7 @@ public class LandingPage extends BasePage {
     }
 
     public void locale() {
-        btnlocale.click();
+        btnLocale.click();
     }
 
     public void pickLanguage(Locale locale) {
